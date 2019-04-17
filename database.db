@@ -1,0 +1,38 @@
+create database btp;
+
+use btp;
+
+create table user(
+   id int not null PRIMARY KEY auto_increment,
+   username varchar(50) not null ,
+   email varchar(50) not null unique,
+   password varchar(50) not null,
+   phone varchar(12) not null,
+   dob date
+);
+
+create table contactUs(
+   id int not null PRIMARY KEY auto_increment,
+   name varchar(50) not null ,
+   email varchar(50) not null ,
+   message varchar(1000) not null,
+   phone varchar(12) not null
+);
+
+create table request(
+   id int not null PRIMARY KEY auto_increment,
+   destination varchar(100) not null ,
+   userid int not null ,
+   status int not null DEFAULT 0,
+   time TIME not null ,
+   date DATE not null ,
+   foreign key (userid) references user(id)
+);
+
+create table trip(
+   id int not null PRIMARY KEY auto_increment,
+   requestid int not null ,
+   cost float ,
+   timeTravel int not null,
+   foreign key (requestid) references request(id)
+);
